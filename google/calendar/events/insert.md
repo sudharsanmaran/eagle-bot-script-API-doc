@@ -29,6 +29,15 @@
 
 Remember, in these prompts, the minimum required data are: event name (summary), date (start), start time (start), and duration (end). Users can include additional information like location, attendees, and more, based on their preferences.
 
+
+## Solution Steps:
+1. Authenticate and set up access to the Google Calendar API.
+2. Retrieve the primary calendar ID using the `calendarList.list` API.
+3. For each event:
+   - Extract event details (summary, date, start time, duration, location, attendees, etc.).
+   - Format the date and time according to the API's requirements.
+   - Use the primary calendar ID to create a new event using the `events.insert` API, providing the formatted event details.
+
 ## HTTP request
 
 POST `https://www.googleapis.com/calendar/v3/calendars/calendarId/events`
