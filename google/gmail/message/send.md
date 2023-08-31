@@ -2,6 +2,26 @@
 
 Once you have created an email message, you can send it by supplying it in the request body of a call to the `messages.send` endpoint, as demonstrated in the following example.
 
+
+### Example User Prompts:
+
+1. **Sending a Basic Email**:
+   - Send a simple email with the subject "Hello" to "john.doe@example.com".
+   - Compose an email saying "Meeting Tomorrow at 2 PM" and send it to "team@example.com".
+   - Send an email to "friend@example.com" with the subject "Check out this link" and the link to a website.
+
+2. **Sending an Email to Multiple Recipients**:
+   - Send an announcement email to both "team@example.com" and "managers@example.com".
+   - Email a project update to "project-team@example.com" and "project-manager@example.com".
+   - Send a party invitation to "friends@example.com" and "family@example.com".
+
+3. **Sending an Email with CC and BCC**:
+   - Send an email to "client@example.com" with a copy to "account-manager@example.com".
+   - Email a report to "supervisor@example.com" with a blind copy to "director@example.com".
+   - Compose an email with CC to "colleague@example.com" and BCC to "personal-archive@example.com".
+
+Feel free to replace the email addresses, subjects, content, and other details to match your specific use case. Additionally, ensure you have the necessary Gmail API credentials and setup to make these API requests.
+
 ### Request
 
 **HTTP Request**
