@@ -24,6 +24,14 @@
 
 In these prompts, you need to specify the `calendarId` and `eventId` as required path parameters for the delete request. Additionally, you can use the optional query parameters `sendNotifications` or `sendUpdates` to control whether notifications are sent to attendees when the event is deleted.
 
+## Solution Steps:
+1. Authenticate and set up access to the Google Calendar API.
+2. For each delete prompt:
+   - Retrieve the list of events from the calendar using the `events.list` API. Filter the events based on the provided event title or event ID.
+   - Extract the `eventId` from the list of events that match the event title or event ID.
+   - Use the `events.delete` API, providing the `calendarId` and `eventId` as path parameters, to delete the event from the calendar.
+   - Optionally, use the `sendNotifications` query parameter to control whether notifications are sent to attendees about the event deletion.
+
 ### HTTP Request
 
 DELETE `https://www.googleapis.com/calendar/v3/calendars/calendarId/events/eventId`
