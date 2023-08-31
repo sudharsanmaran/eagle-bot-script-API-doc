@@ -2,6 +2,44 @@
 
 This endpoint allows you to create a secondary calendar.
 
+## Example User Prompts:
+
+1. **Basic Calendar Creation**:
+   - Create a new calendar named "Work Projects".
+   - Set up a secondary calendar called "Family Events".
+   - Make a new calendar with the title "Fitness Schedule".
+
+2. **Calendar with Description**:
+   - Create a calendar for "Travel Plans" with the description "Keep track of upcoming trips".
+   - Set up a calendar called "Homework Assignments" with the description "Manage all school-related tasks".
+   - Make a calendar titled "Book Club" and add the description "Discuss and schedule book club meetings".
+
+3. **Setting Time Zone**:
+   - Create a new calendar named "Global Meetings" with the time zone set to "UTC".
+   - Set up a calendar called "Conference Schedule" using the time zone "America/Los_Angeles".
+   - Make a new calendar for "Team Events" and set the time zone to "Europe/London".
+
+4. **Full Details Calendar**:
+   - Create a calendar for "Project Deadlines" with the description "Track project due dates" and the time zone "Asia/Tokyo".
+   - Set up a calendar named "Health Goals" with the description "Monitor fitness and wellness objectives" and the time zone "America/Chicago".
+   - Make a new calendar for "Hobby Events" with the description "Keep up with hobby-related activities" and the time zone "Europe/Berlin".
+
+5. **Customized Calendar**:
+   - Create a calendar named "Financial Planning" with the description "Organize financial goals and budgets" and the time zone "America/New_York".
+   - Set up a calendar called "Recipe Collection" with the description "Curate favorite recipes and meal plans" and the time zone "America/Los_Angeles".
+   - Make a new calendar for "Home Renovation" with the description "Plan and schedule home improvement projects" and the time zone "Europe/London".
+
+In these prompts, you'll need to replace the specific details like calendar names, descriptions, and time zones with the desired information for your use case.
+
+## Solution Steps:
+1. Authenticate and set up access to the Google Calendar API.
+2. Create a dictionary containing the necessary properties for the new calendar:
+   - `summary` (string): Title of the calendar.
+   - `description` (string): Description of the calendar (optional).
+   - `location` (string): Geographic location of the calendar (optional).
+   - `timeZone` (string): The time zone of the calendar (optional).
+3. Use the `calendars().insert` API, providing the dictionary as the `body` parameter, to create the new calendar.
+
 ### Request
 
 **HTTP Request**
