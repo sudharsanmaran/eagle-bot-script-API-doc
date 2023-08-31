@@ -24,6 +24,15 @@
 
 Remember, in these prompts, you need to specify the `calendarId` and `eventId` as required path parameters for the update request. Additionally, include the properties you want to update in the `Events` resource in the request body, such as the new start and end times, location, attendees, reminders, description, or working location properties.
 
+## Solution Steps:
+1. Authenticate and set up access to the Google Calendar API.
+2. For each update prompt:
+   - Retrieve the list of events from the calendar using the `events.list` API. Filter the events based on the provided event name.
+   - Extract the `eventId` from the list of events that match the event name.
+   - Prepare the updated event details (start time, end time, location, attendees, reminders, description, working location properties) based on the prompt.
+   - Create an updated `Events` resource with the new details.
+   - Use the `events.update` API, providing the `calendarId` and `eventId` as path parameters, and the updated `Events` resource in the request body to update the event.
+
 ### HTTP Request
 
 PUT `https://www.googleapis.com/calendar/v3/calendars/calendarId/events/eventId`
