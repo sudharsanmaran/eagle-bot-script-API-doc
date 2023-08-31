@@ -1,0 +1,159 @@
+# Insert Event
+
+## example prompt from user
+
+1. **Simple Event**:
+   - Create an event in my primary calendar called "Meeting with Team" on 2023-09-15 at 15:00 for an hour.
+   - Schedule an event named "Conference Call" on 2023-09-20 at 10:30 for 45 minutes in my primary calendar.
+   - Add an event named "Lunch with John" on 2023-09-25 at 12:30 for 1 hour in my main calendar.
+
+2. **Using Different Phrasing**:
+   - Set up a calendar event titled "Project Review" on 2023-09-18 at 14:00 for 2 hours.
+   - I'd like to create a new event for "Brainstorming Session" on 2023-09-22 at 11:00 for 1.5 hours in my main calendar.
+   - Create a calendar entry named "Fitness Class" on 2023-09-30 at 18:00 for 1 hour in my primary calendar.
+
+3. **Including Location**:
+   - Schedule an event named "Client Meeting" on 2023-09-17 at 16:00 for 1.5 hours at the conference room.
+   - Add an event titled "Webinar" on 2023-09-23 at 09:30 for 2 hours at the auditorium in my main calendar.
+   - Create an event named "Gym Session" on 2023-09-29 at 07:00 for 1 hour at the fitness center.
+
+4. **Using Different Time Formats**:
+   - Create an event called "Team Training" on 2023-09-16 at 3:30 PM for 90 minutes in my primary calendar.
+   - Add an event named "Marketing Meeting" on 2023-09-21 at 2:45pm for 1 hour in my main calendar.
+   - Set up an event titled "Dinner Reservation" on 2023-09-28 at 7:00 in the evening for 2 hours in my primary calendar.
+
+5. **With Attendees**:
+   - Schedule a meeting with John and Sarah on 2023-09-19 at 11:00 for 1 hour in my primary calendar.
+   - Add an event with Jane, Mike, and Emily on 2023-09-24 at 14:00 for 2 hours in my main calendar.
+   - Create an event for the project team on 2023-10-01 at 09:30 for 1.5 hours in my primary calendar.
+
+Remember, in these prompts, the minimum required data are: event name (summary), date (start), start time (start), and duration (end). Users can include additional information like location, attendees, and more, based on their preferences.
+
+## HTTP request
+
+POST `https://www.googleapis.com/calendar/v3/calendars/calendarId/events`
+
+## Parameters
+
+| Parameter Name | Value | Description |
+|-|-|-|
+|***Path parameters***|||
+| `calendarId`   | string | Calendar identifier. To retrieve calendar IDs, call the `calendarList.list` method. Use "primary" for the primary calendar of the logged-in user. |                                         
+|***Optional query parameters***|||
+| `conferenceDataVersion` | integer  | Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of `ConferenceData` as well as for creating new conferences using the `createRequest` field of `conferenceData`. The default is 0. Acceptable values are 0 to 1, inclusive. |
+| `maxAttendees`        | integer  | The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.                                   |
+| `sendNotifications`   | boolean  | Deprecated. Whether to send notifications about the creation of the new event. Note that some emails might still be sent even if you set the value to false. The default is false.                  |
+| `sendUpdates`         | string   | Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false. Acceptable values are: "all" (Notifications are sent to all guests), "externalOnly" (Notifications are sent to non-Google Calendar guests only), "none" (No notifications are sent). Warning: Using the value "none" can have significant adverse effects, including events not syncing to external calendars or events being lost altogether for some users. For calendar migration tasks, consider using the `events.import` method instead. |
+| `supportsAttachments` | boolean  | Whether the API client performing the operation supports event attachments. Optional. The default is False.|
+## Authorization
+
+This request requires authorization with at least one of the following scopes:
+
+- `https://www.googleapis.com/auth/calendar`
+- `https://www.googleapis.com/auth/calendar.events`
+
+For more information, see the [authentication and authorization page](https://developers.google.com/calendar/auth).
+
+## Request body
+
+In the request body, supply an `Events` resource with the following properties:
+
+|Property name	|Value	|Description|
+|-|-|-|
+|***Required Properties***|||
+|`end`|nested object| The (exclusive) end time of the event. For a recurring event, this is the end time of the first instance.|
+|`start`| nested object| The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.|
+|***Optional Properties***|||
+| `anyoneCanAddSelf`     | boolean  | Whether anyone can invite themselves to the event (deprecated). Optional. The default is False.                                                                                              |
+| `attachments[].fileUrl` | string   | URL link to the attachment. For adding Google Drive file attachments use the same format as in the `alternateLink` property of the Files resource in the Drive API. Required when adding an attachment.  |
+| `attendees[]`          | list     | The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.  |
+| `attachments[].fileUrl`         | string          | URL link to the attachment. For adding Google Drive file attachments use the same format as in the `alternateLink` property of the Files resource in the Drive API. Required when adding an attachment.  |
+| `attendees[]`                   | list            | The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.  |
+| `attendees[].additionalGuests`  | integer         | Number of additional guests. Optional. The default is 0.                                         |
+| `attendees[].comment`           | string          | The attendee's response comment. Optional.                                                        |
+| `attendees[].displayName`       | string          | The attendee's name, if available. Optional.                                                     |
+| `attendees[].email`             | string          | The attendee's email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322. Required when adding an attendee.  |
+| `attendees[].optional`          | boolean         | Whether this is an optional attendee. Optional. The default is False.                            |
+| `attendees[].resource`          | boolean         | Whether the attendee is a resource. Can only be set when the attendee is added to the event for the first time. Subsequent modifications are ignored. Optional. The default is False.  |
+| `attendees[].responseStatus`    | string          | The attendee's response status. Possible values are: <br> &#8226; `needsAction` - The attendee has not responded to the invitation (recommended for new events). <br> &#8226; `declined` - The attendee has declined the invitation. <br> &#8226; `tentative` - The attendee has tentatively accepted the invitation. <br> &#8226;`"accepted` - The attendee has accepted the invitation.|
+| `colorId`                       | string          | The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the colors endpoint). Optional.  |
+| `conferenceData`                | nested object   | The conference-related information, such as details of a Google Meet conference. To create new conference details use the `createRequest` field. To persist your changes, remember to set the `conferenceDataVersion` request parameter to 1 for all event modification requests.  |
+| `description`                   | string          | Description of the event. Can contain HTML. Optional.                                             |
+| `end.date`                      | date            | The date, in the format "yyyy-mm-dd", if this is an all-day event.                                |
+| `end.dateTime`                  | datetime        | The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in `timeZone`.  |
+| `end.timeZone`                  | string          | The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.  |
+|`location`	|string	|Geographic location of the event as free-form text. Optional.|
+| `originalStartTime.date`        | date            | The date, in the format "yyyy-mm-dd", if this is an all-day event.                                |
+| `originalStartTime.dateTime`    | datetime        | The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in `timeZone`.  |
+| `originalStartTime.timeZone`    | string          | The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.  |
+| `recurrence[]`                  | list            | List of RRULE, EXRULE, RDATE, and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the `start` and `end` fields. This field is omitted for single events or instances of recurring events.  |
+| `reminders.overrides[]`         | list            | If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5.  |
+| `reminders.overrides[].method`  | string          | The method used by this reminder. Possible values are: "email" - Reminders are sent via email. "popup" - Reminders are sent via a UI popup. Required when adding a reminder.  |
+| `reminders.overrides[].minutes` | integer         | Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes). Required when adding a reminder.  |
+| `reminders.useDefault`          | boolean         | Whether the default reminders of the calendar apply to the event.                                  |
+| `sequence`                      | integer         | Sequence number as per iCalendar.                                                                   |
+| `source.title`                  | string          | Title of the source; for example, a title of a web page or an email subject.                      |
+| `source.url`                    | string          | URL of the source pointing to a resource. The URL scheme must be HTTP or HTTPS.                   |
+| `start.date`                    | date            | The date, in the format "yyyy-mm-dd", if this is an all-day event.                                |
+| `start.dateTime`                | datetime        | The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in `timeZone`.  |
+| `start.timeZone`                | string          | The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.  |
+| `status`                        | string          | Status of the event. Optional. Possible values are: "confirmed" - The event is confirmed. This is the default status. "tentative" - The event is tentatively confirmed. "cancelled" - The event is cancelled (deleted). ... |
+| `eventType`                     | string          | Specific type of the event. This cannot be modified after the event is created. Possible values are: <br> &#8226; `default` - A regular event or not further specified.<br> &#8226; `outOfOffice` - An out-of-office event. <br> &#8226; `focusTime` - A focus-time event. <br> &#8226; `workingLocation` - A working location event.<br> Currently, only "default " and "workingLocation" events can be created using the API. Extended support for other event types will be made available in later releases.|
+| `extendedProperties.private`    | object          | Properties that are private to the copy of the event that appears on this calendar.                |
+| `extendedProperties.shared`     | object          | Properties that are shared between copies of the event on other attendees' calendars.               |
+| `gadget.display`                | string          | The gadget's display mode. Deprecated. Possible values are: "icon" - The gadget displays next to the event's title in the calendar view. "chip" - The gadget displays when the event is clicked.  |
+| `gadget.height`                 | integer         | The gadget's height in pixels. The height must be an integer greater than 0. Optional. Deprecated.  |
+| `gadget.iconLink`               | string          | The gadget's icon URL. The URL scheme must be HTTPS. Deprecated.                                   |
+| `gadget.link`                   | string          | The gadget's URL. The URL scheme must be HTTPS. Deprecated.                                        |
+| `gadget.preferences`            | object          | Preferences.                                                                                       |
+| `gadget.title`                  | string          | The gadget's title. Deprecated.                                                                    |
+| `gadget.type`                   | string          | The gadget's type. Deprecated.                                                                     |
+| `gadget.width`                  | integer         | The gadget's width in pixels. The width must be an integer greater than 0. Optional. Deprecated.  |
+| `guestsCanInviteOthers`         | boolean         | Whether attendees other than the organizer can invite others to the event. Optional. The default is True.  |
+| `guestsCanModify`               | boolean         | Whether attendees other than the organizer can modify the event. Optional. The default is False.   |
+| `guestsCanSeeOtherGuests`       | boolean         | Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True.  |
+
+## Response
+
+If successful, this method returns an `Events` resource in the response body.
+
+## Examples
+
+**Python:**
+```python
+
+event = {
+  'summary': 'Google I/O 2015',
+  'location': '800 Howard St., San Francisco, CA 94103',
+  'description': 'A chance to hear more about Google\'s developer products.',
+  'start': {
+    'dateTime': '2015-05-28T09:00:00-07:00',
+    'timeZone': 'America/Los_Angeles',
+  },
+  'end': {
+    'dateTime': '2015-05-28T17:00:00-07:00',
+    'timeZone': 'America/Los_Angeles',
+  },
+  'recurrence': [
+    'RRULE:FREQ=DAILY;COUNT=2'
+  ],
+  'attendees': [
+    {'email': 'lpage@example.com'},
+    {'email': 'sbrin@example.com'},
+  ],
+  'reminders': {
+    'useDefault': False,
+    'overrides': [
+      {'method': 'email', 'minutes': 24 * 60},
+      {'method': 'popup', 'minutes': 10},
+    ],
+  },
+}
+
+event = service.events().insert(calendarId='primary', body=event).execute()
+print 'Event created: %s' % (event.get('htmlLink'))
+```
+
+
+
+
