@@ -15,7 +15,14 @@ Represents properties of the body of an item, such as a message, event or group 
 Here is a JSON representation of the resource
 ```http
 {
-  "content": "string",
-  "contentType": "String"
+  "emailAddress": {
+    "address": "john.doe@example.com",
+    "name": "John Doe"
+  },
+  "status": {
+    "response": "accepted",
+    "time": "2023-08-28T10:00:00Z"
+  },
+  "type": "required"
 }
 ```
