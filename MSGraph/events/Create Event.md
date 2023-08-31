@@ -5,12 +5,19 @@ Create the [event](../resources/Event.md) object.
 ### Request:
 The request is [event](../resources/Event.md).
 
-
-
+-  There was no required fields for this. If we created it  with empty response that means a event will be created from now to next 30 minutes.
+- *Mostly Used fields:*
+  - `allowNewTimeProposals`: (Boolean) True if the meeting organizer allows invitees to propose a new time.
+  - `body`: ([ItemBody](../resources/ItemBody.md)) The body of the message associated with the event.
+  - `end`: ([DateTimeTimeZone](../resources/DateTimeTimeZone.md)) The date, time, and time zone that the event ends.
+  - `start`: ([DateTimeTimeZone](../resources/DateTimeTimeZone.md)) The start date, time, and time zone of the event.
+  - `subject`: (string) The text of the event's subject line.
+  - `attendees`: ([Attendee](../resources/Attendee.md) collection) The collection of attendees for the event.
+  - `recurrence`: [PatternedRecurrence](../resources/PatternedRecurrence.md) The recurrence pattern for the event.                                        |
 
 ### Examples:
 
-- **Create an event in my primary calendar called `Meeting with Team` on 2023-09-15 at 15:00 for an hour.**
+- **Create an event in my calendar called `Meeting with Team` on 2023-09-15 at 15:00 for an hour.**
 
 #### Request
 
@@ -109,7 +116,7 @@ Content-Type: application/json
 }
 ```
 
-- **Create an event in my primary calendar called `Dinner at NewYork` with "Adele Vance" on 2023-10-01 at 20:00 for two hours.**
+- **Create an event in my calendar called `Dinner at NewYork` with "Adele Vance" on 2023-10-01 at 20:00 for two hours.**
 #### Request
 ```http request
 POST https://graph.microsoft.com/v1.0/me/events
@@ -260,7 +267,7 @@ Content-Type: application/json
 
 
 
-- ** Create an event with recurring date for every friday `Weekly status` for 30min
+- **Create an event with recurring date for every friday `Weekly status` for 30min**
 #### Request
 ```http request
 POST https://graph.microsoft.com/v1.0/me/events

@@ -2,15 +2,18 @@
 ## Properties
 
 Here are the properties that you can use when creating or updating an event in an Outlook calendar. Some of these properties are optional and can be included in the request body to customize your event.
-### Required Fields:
+There was no required fields.
+### Mostly Used Fields:
 
 | Index | Property              | Type                                                       | Description                                                          |
 |-------|-----------------------|------------------------------------------------------------|----------------------------------------------------------------------|
 | 1     | allowNewTimeProposals | Boolean                                                    | True if the meeting organizer allows invitees to propose a new time. |
-| 3     | body                  | [ItemBody](../resources/ItemBody.md)                       | The body of the message associated with the event.                   |
-| 5     | end                   | [DateTimeTimeZone](../resources/DateTimeTimeZone.md)       | The date, time, and time zone that the event ends.                   |
-| 11    | start                 | [DateTimeTimeZone](../resources/DateTimeTimeZone.md)       | The start date, time, and time zone of the event.                    |
-| 12    | subject               | string                                                     | The text of the event's subject line.                                |
+| 2     | body                  | [ItemBody](../resources/ItemBody.md)                       | The body of the message associated with the event.                   |
+| 3     | end                   | [DateTimeTimeZone](../resources/DateTimeTimeZone.md)       | The date, time, and time zone that the event ends.                   |
+| 4     | start                 | [DateTimeTimeZone](../resources/DateTimeTimeZone.md)       | The start date, time, and time zone of the event.                    |
+| 5     | subject               | string                                                     | The text of the event's subject line.                                |
+| 6     | attendees             | [Attendee](../resources/Attendee.md) collection            | The collection of attendees for the event.                           |
+| 7     | recurrence            | [PatternedRecurrence](../resources/PatternedRecurrence.md) | The recurrence pattern for the event.                                |
 
 ### Optional Fields:
 
@@ -49,9 +52,7 @@ Here are the properties that you can use when creating or updating an event in a
 | 31    | isCancelled                | Boolean                                                    | Set to true if the event has been canceled.                                  |
 | 32    | type                       | string                                                     | The event type.                                                              |
 | 33    | originalStartTimeZone      | string                                                     | The start time zone that was set when the event was created.                 |
-| 34    | recurrence                 | [PatternedRecurrence](../resources/PatternedRecurrence.md) | The recurrence pattern for the event.                                        |
-| 35    | categories                 | string collection                                          | The categories associated with the event.                                    |
-| 36    | attendees                  | [Attendee](../resources/Attendee.md) collection            | The collection of attendees for the event.                                   |
+| 34    | categories                 | string collection                                          | The categories associated with the event.                                    |
 
 ## JSON representation
 Here is a JSON representation of the resource

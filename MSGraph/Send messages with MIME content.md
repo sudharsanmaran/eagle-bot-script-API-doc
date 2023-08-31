@@ -82,7 +82,7 @@ HTTP/1.1 202 Accepted
 ```
 
 
-- Create a message with custom Internet message headers and send the message
+- **Create a message with custom Internet message headers and send the message**
 #### Request
 ```http request
 POST https://graph.microsoft.com/v1.0/me/sendMail
