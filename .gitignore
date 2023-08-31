@@ -1,0 +1,2 @@
+# add gitignore to ignore idea folder in all subfolders
+**/.idea/*
