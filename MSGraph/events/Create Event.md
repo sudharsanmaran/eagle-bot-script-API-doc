@@ -109,7 +109,7 @@ Content-Type: application/json
 }
 ```
 
-- **Create an event in my primary calendar called `Dinner at NewYork` with "Adele Vance" on 2023-10-00 at 20:00 for two hours.**
+- **Create an event in my primary calendar called `Dinner at NewYork` with "Adele Vance" on 2023-10-01 at 20:00 for two hours.**
 #### Request
 ```http request
 POST https://graph.microsoft.com/v1.0/me/events
@@ -123,11 +123,11 @@ Content-Type: application/json
     "content": "Will make it happy?"
   },
   "start": {
-      "dateTime": "2023-09-15T15:30:00",
+      "dateTime": "2023-10-01T20:00:00",
       "timeZone": "Asia/Kolkata"
   },
   "end": {
-      "dateTime": "2023-09-15T17:00:00",
+      "dateTime": "2023-10-01T22:00:00",
       "timeZone": "Asia/Kolkata"
   },
   "attendees": [
@@ -201,11 +201,11 @@ Content-Type: application/json
         "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\nWill make it happy?\r\n</body>\r\n</html>\r\n"
     },
     "start": {
-        "dateTime": "2023-09-15T15:30:00.0000000",
+        "dateTime": "2023-10-01T20:00:00.0000000",
         "timeZone": "Asia/Kolkata"
     },
     "end": {
-        "dateTime": "2023-09-15T17:00:00.0000000",
+        "dateTime": "2023-10-01T22:00:00.0000000",
         "timeZone": "Asia/Kolkata"
     },
     "location": {
@@ -274,11 +274,11 @@ Content-Type: application/json
     "content": "Are you ready to join?"
   },
   "start": {
-      "dateTime": "2023-09-15T15:30:00",
+      "dateTime": "2023-09-01T15:00:00",
       "timeZone": "Asia/Kolkata"
   },
   "end": {
-      "dateTime": "2023-09-15T17:00:00",
+      "dateTime": "2023-09-01T15:30:00",
       "timeZone": "Asia/Kolkata"
   },
   "allowNewTimeProposals": true,
@@ -342,11 +342,11 @@ Content-Type: application/json
         "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\nAre you ready to join?\r\n</body>\r\n</html>\r\n"
     },
     "start": {
-        "dateTime": "2023-09-08T15:30:00.0000000",
+        "dateTime": "2023-09-01T15:00:00.0000000",
         "timeZone": "Asia/Kolkata"
     },
     "end": {
-        "dateTime": "2023-09-08T17:00:00.0000000",
+        "dateTime": "2023-09-01T15:30:00.0000000",
         "timeZone": "Asia/Kolkata"
     },
     "location": {
