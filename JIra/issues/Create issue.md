@@ -2,6 +2,33 @@
 
 Creates an issue or, where the option to create subtasks is enabled in Jira, a subtask. A transition may be applied, to move the issue or subtask to a workflow step other than the default start step, and issue properties set.
 
+## Request
+### Query parameters
+
+**bonus:** ref for all possible properties of issue for particular project with [create issue metadata](../dependencies/issues/get_create_issue_metadata.md)
+
+| Property      | Type    | Description                                                                                                                                                                                                                                                                                                                          |
+|---------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| updateHistory | boolean | Whether the project in which the issue is created is added to the user's Recently viewed project list, as shown under Projects in Jira. When provided, the issue type and request type are added to the user's history for a project. These values are then used to provide defaults on the issue create screen. <br/>Default: false |
+
+### Properties
+
+**Required body properties:**
+| Property      | Type    | Description    
+|---------------|---------|----------------|
+project identifier (id or name) |string |The ID or key of the project the issue or subtask is to be created in.
+summary |string | The summary description for the new issue or subtask.
+issuetype | string | The ID or name of the issue type for the new issue or subtask.
+
+**Optional body properties:**
+| Index | Property              | Type                                                 | Description                                                                                                                                                                                                                                                                                                 |
+|-------|-----------------------|------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1     | fields                | object                                               | List of issue screen fields to update, specifying the sub-field to update and its value for each field. This field provides a straightforward option when setting a sub-field. When multiple sub-fields or other operations are required, use update. Fields included in here cannot be included in update. |
+| 2     | historyMetadata       | [HistoryMetadata](../resources/HistoryMetadata.md)      | Additional issue history details.                                                                                                                                                                                                                                                                           |
+| 3     | properties            | array<[EntityProperty](../resources/EntityProperty.md)> | Details of issue properties to be add or update.                                                                                                                                                                                                                                                            |
+| 4     | transition            | [IssueTransition](../resources/IssueTransition.md)      | Details of a transition. Required when performing a transition, optional when creating or editing an issue.                                                                                                                                                                                                 |
+| 5     | update                | object                                               | A Map containing the field field name and a list of operations to perform on the issue screen field. Note that fields included in here cannot be included in fields.                                                                                                                                        |
+| 6     | Additional Properties | any                                                  | Extra properties of any type may be provided to this object.                                                                                                                                  
 ## example user prompts:
 
 1. **Creating a Bug Report in Project XYZ**:
@@ -26,32 +53,13 @@ Creates an issue or, where the option to create subtasks is enabled in Jira, a s
 
 Feel free to customize the project names, issue types, summaries, and descriptions to match your specific Jira setup and requirements. You can also specify additional details like assignees, due dates, and labels depending on your Jira project's configuration.
 
-## Request
-### Query parameters
+## Possible Information to Re-prompt Users if Required Fails:
 
-| Property      | Type    | Description                                                                                                                                                                                                                                                                                                                          |
-|---------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| updateHistory | boolean | Whether the project in which the issue is created is added to the user's Recently viewed project list, as shown under Projects in Jira. When provided, the issue type and request type are added to the user's history for a project. These values are then used to provide defaults on the issue create screen. <br/>Default: false |
+1. **List of Projects:** Provide the user with a list of projects they have access to.
 
-### Properties
+2. **Issue Types for Mentioned Project:** If the user has already mentioned a project name, retrieve and display all the issue types available for that specific project.
 
-**Required body properties:**
-| Property      | Type    | Description    
-|---------------|---------|----------------|
-project_id |string |The ID or key of the project the issue or subtask is to be created in.
-summary |string | The summary description for the new issue or subtask.
-issuetype | string | The ID or name of the issue type for the new issue or subtask.
-
-**Optional body properties:**
-| Index | Property              | Type                                                 | Description                                                                                                                                                                                                                                                                                                 |
-|-------|-----------------------|------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1     | fields                | object                                               | List of issue screen fields to update, specifying the sub-field to update and its value for each field. This field provides a straightforward option when setting a sub-field. When multiple sub-fields or other operations are required, use update. Fields included in here cannot be included in update. |
-| 2     | historyMetadata       | [HistoryMetadata](../resources/HistoryMetadata.md)      | Additional issue history details.                                                                                                                                                                                                                                                                           |
-| 3     | properties            | array<[EntityProperty](../resources/EntityProperty.md)> | Details of issue properties to be add or update.                                                                                                                                                                                                                                                            |
-| 4     | transition            | [IssueTransition](../resources/IssueTransition.md)      | Details of a transition. Required when performing a transition, optional when creating or editing an issue.                                                                                                                                                                                                 |
-| 5     | update                | object                                               | A Map containing the field field name and a list of operations to perform on the issue screen field. Note that fields included in here cannot be included in fields.                                                                                                                                        |
-| 6     | Additional Properties | any                                                  | Extra properties of any type may be provided to this object.                                                                                                                                                                                                                                                |
-
+3. **Re-prompt for Project Creation:** If the mentioned project name cannot be found, consider re-prompting the user to confirm if they want to create a project with the mentioned name, as it couldn't be located in the existing projects.
 
 ### Request Body
 ```http request

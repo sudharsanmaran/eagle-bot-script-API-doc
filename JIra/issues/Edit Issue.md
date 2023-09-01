@@ -7,6 +7,7 @@ Edit an existing issue in Jira, allowing you to make changes to various fields, 
 ### Path Parameter
 
 - **issueIdOrKey** (string, required): The ID or key of the issue you want to edit.
+**note:** issue id can be fetched from [issue picker API](../dependencies/issues/issue_picker.md) if user give matched issue properties.
 
 ### Query Parameters
 
@@ -22,15 +23,9 @@ Edit an existing issue in Jira, allowing you to make changes to various fields, 
 
 ### Request Body
 **Required body properties:**
-| Property   | Type   | Description                                                            |
-| ---------- | ------ | ---------------------------------------------------------------------- |
-| project_id | string | The ID or key of the project the issue or subtask is to be created in. |
-| summary    | string | The summary description for the new issue or subtask.                  |
-| issuetype  | string | The ID or name of the issue type for the new issue or subtask.         |
+- **fields** (object): A list of issue screen fields to update, specifying the sub-field to update and its value for each field. Fields included here cannot be included in the "update" field.
 
 **Optional body properties:**
-
-- **fields** (object): A list of issue screen fields to update, specifying the sub-field to update and its value for each field. Fields included here cannot be included in the "update" field.
 
 - **historyMetadata** ([HistoryMetadata](resources/HistoryMetadata.md)): Additional issue history details.
 
