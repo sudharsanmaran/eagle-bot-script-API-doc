@@ -7,6 +7,7 @@ Edit an existing issue in Jira, allowing you to make changes to various fields, 
 ### Path Parameter
 
 - **issueIdOrKey** (string, required): The ID or key of the issue you want to edit.
+
 **note:** issue id can be fetched from [issue picker API](../dependencies/issues/issue_picker.md) if user give matched issue properties.
 
 ### Query Parameters
@@ -36,6 +37,44 @@ Edit an existing issue in Jira, allowing you to make changes to various fields, 
 - **update** (object): A map containing the field name and a list of operations to perform on the issue screen field. Fields included here cannot be included in the "fields" field.
 
 - **Additional Properties** (any): Extra properties of any type that may be provided.
+
+Sure, here are example user prompts and possible values to re-prompt if required fails for the "Edit Issue" API:
+
+### Example User Prompts:
+
+1. **Editing an Issue**:
+   - I want to update an existing issue in Jira with the issue key "PROJ-123".
+   - Edit issue "BUG-456" to change the assignee.
+   - Please modify the description of issue "TASK-789".
+   - Make changes to issue "FEATURE-101" to reflect the latest status.
+
+2. **Applying a Transition to an Issue**:
+   - Transition issue "PROJ-234" to the "In Progress" status.
+   - Change the status of issue "BUG-789" to "Resolved".
+   - I need to move issue "TASK-567" to the "Testing" phase.
+   - Apply a transition to issue "EPIC-123" to mark it as "Done".
+
+3. **Updating Issue Properties**:
+   - Add a property to issue "BUG-123" to track additional information.
+   - Set a custom property for issue "TASK-456" to store special data.
+   - I want to add a property to issue "STORY-789" to store release notes.
+   - Please update the properties of issue "EPIC-456" with the latest details.
+
+### Possible Information to Re-prompt Users if Required Fails:
+
+1. **Issue ID/Key Not Found:** If the provided issue ID or key cannot be found, prompt the user to verify the ID/key or provide another one.
+
+2. **Permission Issues:** If the user lacks permission to edit the issue or override screen security, inform them about the permission requirements and offer to retry with appropriate permissions.
+
+3. **Invalid Data:** If the request is malformed or contains invalid data, provide guidance on the required format and prompt the user to correct the input.
+
+4. **Notification Options:** If the user wants to disable notification emails but lacks the necessary permissions, explain the permissions required and offer to proceed with notifications enabled or help them grant the necessary permissions.
+
+5. **Expand Parameter:** If the "returnIssue" parameter is set to true and the user wants to use the "expand" parameter but provides an invalid value, inform them of the correct options for the "expand" parameter.
+
+6. **Screen Security Overrides:** If the user wants to override screen security (either for hidden or uneditable fields), ensure they have the necessary permissions and explain the available options.
+
+By addressing these potential issues and providing clear instructions, you can ensure a smoother interaction with the "Edit Issue" API in Jira.
 
 ## Responses
 
