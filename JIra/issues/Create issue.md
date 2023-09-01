@@ -2,6 +2,30 @@
 
 Creates an issue or, where the option to create subtasks is enabled in Jira, a subtask. A transition may be applied, to move the issue or subtask to a workflow step other than the default start step, and issue properties set.
 
+## example user prompts:
+
+1. **Creating a Bug Report in Project XYZ**:
+   - Create a new bug report in project "XYZ" with the summary "UI Bug on Homepage".
+   - I need to log a bug in project "XYZ" for a critical issue with the summary "Broken Login Button".
+   - Please create an issue in project "XYZ" to track the bug "404 Error on Product Page".
+
+2. **Adding a New Task in Project ABC**:
+   - Add a task to project "ABC" with the title "Implement User Authentication".
+   - I want to create a task in project "ABC" called "Design Landing Page".
+   - Create an issue type "Task" in project "ABC" with the description "Backend Development for User Registration".
+
+3. **Reporting an Epic in Project QRS**:
+   - Report an epic in project "QRS" with the name "Project Redesign".
+   - I'd like to create an epic in project "QRS" called "Mobile App Enhancement".
+   - Please help me create an epic for project "QRS" titled "New Feature Development".
+
+4. **Raising a Story in Project PQR**:
+   - Raise a user story in project "PQR" with the title "User Profile Page".
+   - I need to add a story in project "PQR" for "Shopping Cart Checkout".
+   - Create a new user story in project "PQR" named "Integration with Payment Gateway".
+
+Feel free to customize the project names, issue types, summaries, and descriptions to match your specific Jira setup and requirements. You can also specify additional details like assignees, due dates, and labels depending on your Jira project's configuration.
+
 ## Request
 ### Query parameters
 
@@ -11,6 +35,14 @@ Creates an issue or, where the option to create subtasks is enabled in Jira, a s
 
 ### Properties
 
+**Required body properties:**
+| Property      | Type    | Description    
+|---------------|---------|----------------|
+project_id |string |The ID or key of the project the issue or subtask is to be created in.
+summary |string | The summary description for the new issue or subtask.
+issuetype | string | The ID or name of the issue type for the new issue or subtask.
+
+**Optional body properties:**
 | Index | Property              | Type                                                 | Description                                                                                                                                                                                                                                                                                                 |
 |-------|-----------------------|------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1     | fields                | object                                               | List of issue screen fields to update, specifying the sub-field to update and its value for each field. This field provides a straightforward option when setting a sub-field. When multiple sub-fields or other operations are required, use update. Fields included in here cannot be included in update. |
