@@ -11,17 +11,17 @@ read:issue:jira-software
 
 #### Parameters
 
-| Parameter Name | Value | Description |
-|-|-|-|
-|***Path parameters***|||
-|`epicIdOrKey`| string <span style="font-size: small;color: red;">(***REQUIRED*** )</span>  | The ID or key of the epic that contains the requested issues.|
-|***Query parameters***|||
-|`startAt`|integer| The starting index of the returned issues. Base index: 0.|
-|`maxResults`|integer| The maximum number of issues to return per page. Default: 50.|
-|`jql`|string| Filters results using a JQL query. If you define an order in your JQL query, it will override the default order of the returned issues.|
-|`validateQuery`|boolean| Specifies whether to validate the JQL query or not. Default: true.|
-|`fields`|array of objects| The list of fields to return for each issue. By default, all navigable and Agile fields are returned.|
-|`expand`|string| A comma-separated list of the parameters to expand.|
+| Parameter Name         | Value                                                                      | Description                                                                                                                             |
+| ---------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| ***Path parameters***  |                                                                            |                                                                                                                                         |
+| `epicIdOrKey`          | string <span style="font-size: small;color: red;">(***REQUIRED*** )</span> | The ID or key of the epic that contains the requested issues.                                                                           |
+| ***Query parameters*** |                                                                            |                                                                                                                                         |
+| `startAt`              | integer                                                                    | The starting index of the returned issues. Base index: 0.                                                                               |
+| `maxResults`           | integer                                                                    | The maximum number of issues to return per page. Default: 50.                                                                           |
+| `jql`                  | string                                                                     | Filters results using a JQL query. If you define an order in your JQL query, it will override the default order of the returned issues. |
+| `validateQuery`        | boolean                                                                    | Specifies whether to validate the JQL query or not. Default: true.                                                                      |
+| `fields`               | array of objects                                                           | The list of fields to return for each issue. By default, all navigable and Agile fields are returned.                                   |
+| `expand`               | string                                                                     | A comma-separated list of the parameters to expand.                                                                                     |
 
 **Notes:**
 - This operation returns all issues that belong to the specified epic.
@@ -35,13 +35,13 @@ read:issue:jira-software
 
 ## Responses
 
-| Status code | Status name | Message |
-| - | - | - |
-|200|OK|Returns the requested issues, at the specified page of the results. <br> (**contentType**: application/json)|
-|400 |Bad Request | Returned if the request is invalid. |
-|401| Unauthorized | Returned if the user is not logged in. |
-|403|Forbidden|Returned if the user does not a have valid license.|
-|404|Not Found|Returned if the epic does not exist or the user does not have permission to view it.|
+| Status code | Status name  | Message                                                                                                      |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| 200         | OK           | Returns the requested issues, at the specified page of the results. <br> (**contentType**: application/json) |
+| 400         | Bad Request  | Returned if the request is invalid.                                                                          |
+| 401         | Unauthorized | Returned if the user is not logged in.                                                                       |
+| 403         | Forbidden    | Returned if the user does not a have valid license.                                                          |
+| 404         | Not Found    | Returned if the epic does not exist or the user does not have permission to view it.                         |
 
 
   ## Example

@@ -22,11 +22,11 @@ Edit an existing issue in Jira, allowing you to make changes to various fields, 
 
 ### Request Body
 **Required body properties:**
-| Property      | Type    | Description    
-|---------------|---------|----------------|
-project_id |string |The ID or key of the project the issue or subtask is to be created in.
-summary |string | The summary description for the new issue or subtask.
-issuetype | string | The ID or name of the issue type for the new issue or subtask.
+| Property   | Type   | Description                                                            |
+| ---------- | ------ | ---------------------------------------------------------------------- |
+| project_id | string | The ID or key of the project the issue or subtask is to be created in. |
+| summary    | string | The summary description for the new issue or subtask.                  |
+| issuetype  | string | The ID or name of the issue type for the new issue or subtask.         |
 
 **Optional body properties:**
 
