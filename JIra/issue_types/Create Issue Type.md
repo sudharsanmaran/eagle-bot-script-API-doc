@@ -53,3 +53,85 @@ Content-Type: application/json'
   "subtask": true
 }
 ```
+
+## Examples 
+### Add Standard Issue Type
+
+#### Request
+
+The JSON payload includes the following attributes:
+
+- `name` (string): The name of the issue type, which is "Bug" in this example.
+- `description` (string): A description of the issue type, indicating that it represents a software bug or defect.
+- `type` (string): Specifies that this is a standard issue type.
+
+```http
+POST https://your-jira-instance/rest/api/3/issuetype
+Content-Type: application/json
+Authorization: Bearer <your-access-token>
+
+{
+  "name": "Bug",
+  "description": "Represents a software bug or defect",
+  "type": "standard"
+}
+
+
+```
+#### Response
+
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "self": "https://your-jira-instance/rest/api/3/issuetype/10006",
+  "id": "10006",
+  "description": "Represents a software bug or defect",
+  "iconUrl": "https://your-jira-instance/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+  "name": "Bug",
+  "untranslatedName": "Bug",
+  "subtask": false,
+  "avatarId": 10300,
+  "hierarchyLevel": 0
+}
+```
+
+## Add Subtask Issue Type
+
+### Request
+The JSON payload includes the following attributes:
+
+- `name` (string): The name of the issue type, which is "Sub-task" in this example.
+- `description` (string): A description of the issue type, indicating that it represents a sub-task within a larger task.
+- `type` (string): Specifies that this is a subtask issue type.
+
+```http
+POST https://your-jira-instance/rest/api/3/issuetype
+Content-Type: application/json
+Authorization: Bearer <your-access-token>
+
+{
+  "name": "Sub-task",
+  "description": "Represents a sub-task within a larger task",
+  "type": "subtask"
+}
+```
+
+### Response
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "self": "https://your-jira-instance/rest/api/3/issuetype/10007",
+  "id": "10007",
+  "description": "Represents a sub-task within a larger task",
+  "iconUrl": "https://your-jira-instance/rest/api/2/universal_avatar/view/type/issuetype/avatar/10301?size=medium",
+  "name": "Sub-task",
+  "untranslatedName": "Sub-task",
+  "subtask": true,
+  "avatarId": 10301,
+  "hierarchyLevel": 1
+}
+```
